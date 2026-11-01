@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff4b8">
+  <title>THE KRUSTY CRAB — My Little Diary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="password-screen" class="password-screen">
+    <div class="password-card">
+      <div class="password-mascot">🧽</div>
+      <p class="eyebrow">WELCOME TO BIKINI BOTTOM</p>
+      <h1>THE KRUSTY CRAB</h1>
+      <p class="welcome-line">dear diary, it's me again.</p>
+      <form id="unlock-form">
+        <label for="password-input">Your secret password</label>
+        <input id="password-input" type="password" placeholder="Enter your password" required autocomplete="current-password">
+        <button type="submit">OPEN MY DIARY ✦</button>
+        <p id="password-error" class="error-message" aria-live="polite"></p>
+      </form>
+      <p class="tiny-note">a little corner of the ocean, just for my memories.</p>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-icon">🫧</span>
+        <div>
+          <h2>THE KRUSTY CRAB</h2>
+          <small>my little diary</small>
+        </div>
+      </div>
+
+      <div class="sidebar-mascot">
+        <div class="sponge-face">🧽</div>
+        <p>Oh, hi there!</p>
+        <small>Ready to make some memories?</small>
+      </div>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <p class="nav-label">MY LITTLE WORLD</p>
+        <button class="nav-link active" data-page="home">🏠 Home</button>
+        <button class="nav-link" data-page="entries">📖 My entries</button>
+        <button class="nav-link" data-page="new-entry">✏️ Write a memory</button>
+        <button class="nav-link" data-page="calendar">📅 Memory calendar</button>
+        <button class="nav-link" data-page="categories">🗂️ Categories</button>
+        <button class="nav-link" data-page="search">🔎 Find a memory</button>
+
+        <p class="nav-label">UNDER THE SEA</p>
+        <button class="nav-link" data-page="characters">🐚 Bikini Bottom</button>
+        <button class="nav-link" data-page="backup">💌 Backups & settings</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span>🌊</span>
+        somewhere under the sea,
+        my little memories live.
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">A LITTLE PLACE FOR MY THOUGHTS</p>
+          <h1 id="page-heading">Good day, little sea star!</h1>
+        </div>
+        <div class="topbar-right">
+          <span id="today-date"></span>
+          <button id="lock-button" class="lock-button" title="Lock diary">🔒</button>
+        </div>
+      </header>
+
+      <section id="home" class="page active-page">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <p class="eyebrow">YOUR LITTLE CORNER OF THE OCEAN</p>
+            <h2>Oh, hello again! <span>🧽</span></h2>
+            <p>Every little moment deserves a place to stay. How was your day?</p>
+            <button class="primary-button" data-go="new-entry">Write today's memory ✎</button>
+          </div>
+          <div class="hero-character">🧽</div>
+          <span class="bubble bubble-one">○</span>
+          <span class="bubble bubble-two">○</span>
+          <span class="bubble bubble-three">○</span>
+        </div>
+
+        <div class="quote-card">
+          <span>💛 A LITTLE REMINDER</span>
+          <p id="daily-quote">You're doing fine. Take life one bubble at a time.</p>
+          <small>— SpongeBob's corner</small>
+          <button id="new-quote" class="subtle-button">Another reminder ↻</button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span>📚</span>
+            <p>Total memories</p>
+            <strong id="total-entries">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>📸</span>
+            <p>Photos saved</p>
+            <strong id="total-photos">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>💭</span>
+            <p>Today's mood</p>
+            <strong id="home-mood">Not set</strong>
+          </article>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FRESH FROM THE OCEAN</p>
+            <h2>Recent memories</h2>
+          </div>
+          <button class="text-button" data-go="entries">See all →</button>
+        </div>
+        <div id="recent-entries" class="entries-list">
+          <div class="empty-state">
+            <span>🐚</span>
+            <h3>Your story starts here!</h3>
+            <p>Your memories will appear here once you write your first entry.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="entries" class="page">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EVERY MOMENT COUNTS</p>
+            <h2>My memory collection 📖</h2>
+          </div>
+          <button class="primary-button" data-go="new-entry">+ New entry</button>
+        </div>
+        <div id="all-entries" class="entries-list"></div>
+      </section>
+
+      <section id="new-entry" class="page">
+        <div class="form-card">
+          <p class="eyebrow">A NEW PAGE IN YOUR NOTEBOOK</p>
+          <h2>Let's write a memory! ✏️</h2>
+          <form id="entry-form">
+            <label for="entry-title">What's today's story called?</label>
+            <input id="entry-title" type="text" maxlength="100" placeholder="Give this memory a title..." required>
+
+            <div class="form-row">
+              <div>
+                <label for="entry-date">Date</label>
+                <input id="entry-date" type="date" required>
+              </div>
+              <div>
+                <label for="entry-time">Time</label>
+                <input id="entry-time" type="time">
+              </div>
+            </div>
+
+            <label>How are you feeling today?</label>
+            <div class="mood-picker" id="mood-picker">
+              <button type="button" data-mood="Happy">🧽<small>Happy</small></button>
+              <button type="button" data-mood="Excited">⭐<small>Excited</small></button>
+              <button type="button" data-mood="Calm">🐌<small>Calm</small></button>
+              <button type="button" data-mood="Sad">🦑<small>Sad</small></button>
+              <button type="button" data-mood="Silly">⭐<small>Silly</small></button>
+              <button type="button" data-mood="Tired">🦀<small>Tired</small></button>
+            </div>
+
+            <label for="entry-category">Memory category</label>
+            <select id="entry-category">
+              <option value="Everyday">Everyday</option>
+              <option value="School">School</option>
+              <option value="Friends">Friends</option>
+              <option value="Family">Family</option>
+              <option value="Personal">Personal</option>
+              <option value="Special moments">Special moments</option>
+              <option value="Random thoughts">Random thoughts</option>
+            </select>
+
+            <label for="entry-text">Dear diary...</label>
+            <textarea id="entry-text" rows="9" placeholder="Tell me everything. This page is all yours..." required></textarea>
+
+            <div class="form-row">
+              <div>
+                <label for="entry-weather">Weather ☁️</label>
+                <input id="entry-weather" type="text" placeholder="Sunny, rainy, cloudy...">
+              </div>
+              <div>
+                <label for="entry-song">Song on repeat 🎧</label>
+                <input id="entry-song" type="text" placeholder="Song — Artist">
+              </div>
+            </div>
+
+            <label for="entry-notes">Little highlights</label>
+            <textarea id="entry-notes" rows="3" placeholder="Little things I don't want to forget..."></textarea>
+
+            <label for="entry-photos">Photos 📸</label>
+            <input id="entry-photos" type="file" accept="image/*" multiple>
+            <small class="field-note">Photos are stored on this device. Export backups regularly!</small>
+
+            <input id="entry-id" type="hidden">
+            <div class="form-actions">
+              <button type="button" class="secondary-button" data-go="home">Cancel</button>
+              <button type="submit" class="primary-button">Save this memory ♡</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="calendar" class="page">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">A YEAR FULL OF LITTLE MOMENTS</p>
+            <h2>Memory calendar 📅</h2>
+          </div>
+        </div>
+        <div class="calendar-card">
+          <div class="calendar-controls">
+            <button id="previous-month">←</button>
+            <h3 id="calendar-month"></h3>
+            <button id="next-month">→</button>
+          </div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+          <p class="calendar-hint">Days with a little bubble have saved memories. 🫧</p>
+        </div>
+        <div id="calendar-entries"></div>
+      </section>
+
+      <section id="categories" class="page">
+        <p class="eyebrow">SORTED LITTLE TREASURES</p>
+        <h2>Memories by category 🗂️</h2>
+        <div id="category-list" class="category-grid"></div>
+      </section>
+
+      <section id="search" class="page">
+        <p class="eyebrow">NOTHING GETS LOST AT SEA</p>
+        <h2>Find an old memory 🔎</h2>
+        <input id="search-input" type="search" placeholder="Search titles, thoughts, songs...">
+        <div id="search-results" class="entries-list"></div>
+      </section>
+
+      <section id="characters" class="page">
+        <p class="eyebrow">YOUR FRIENDS FROM BIKINI BOTTOM</p>
+        <h2>Meet the neighborhood! 🐚</h2>
+        <p class="section-description">Click a character to receive a little message.</p>
+        <div id="character-grid" class="character-grid">
+          <button class="character-card" data-character="SpongeBob"><span>🧽</span><strong>SpongeBob</strong><small>The cheerful one</small></button>
+          <button class="character-card" data-character="Patrick"><span>⭐</span><strong>Patrick</strong><small>The silly one</small></button>
+          <button class="character-card" data-character="Squidward"><span>🦑</span><strong>Squidward</strong><small>The realist</small></button>
+          <button class="character-card" data-character="Gary"><span>🐌</span><strong>Gary</strong><small>The quiet companion</small></button>
+          <button class="character-card" data-character="Sandy"><span>🐿️</span><strong>Sandy</strong><small>The clever one</small></button>
+          <button class="character-card" data-character="Mr. Krabs"><span>🦀</span><strong>Mr. Krabs</strong><small>The treasure keeper</small></button>
+          <button class="character-card" data-character="Pearl"><span>🐳</span><strong>Pearl</strong><small>The big-hearted one</small></button>
+          <button class="character-card" data-character="Plankton"><span>🦠</span><strong>Plankton</strong><small>The tiny mastermind</small></button>
+          <button class="character-card" data-character="Mrs. Puff"><span>🐡</span><strong>Mrs. Puff</strong><small>The patient teacher</small></button>
+        </div>
+        <div id="character-message" class="character-message" aria-live="polite">Pick a friend to hear what they have to say!</div>
+      </section>
+
+      <section id="backup" class="page">
+        <p class="eyebrow">KEEP YOUR MEMORIES SAFE</p>
+        <h2>Backups & settings 💌</h2>
+        <div class="settings-card">
+          <h3>📦 Your diary backups</h3>
+          <p>Export your entries and photos so you can keep a copy outside this browser.</p>
+          <button id="export-json" class="primary-button">Export entries as JSON</button>
+          <button id="export-photos" class="secondary-button">Export photos backup</button>
+          <label for="import-json">Restore entries from a JSON backup</label>
+          <input id="import-json" type="file" accept=".json,application/json">
+        </div>
+        <div class="settings-card">
+          <h3>🔐 Privacy reminder</h3>
+          <p>This is a static website. A password screen alone cannot protect diary data from someone who can inspect the website or browser storage. We will work on encryption in the next steps. Keep your password private and back up your memories.</p>
+          <button id="clear-diary" class="danger-button">Clear all diary data</button>
+        </div>
+      </section>
+
+      <footer class="main-footer">
+        🫧 somewhere under the sea, my little memories live. 🫧
+      </footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
